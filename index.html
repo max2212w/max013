@@ -1,0 +1,79 @@
+<! doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>หน้าแรก | เที่ยวบ้านเรา</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<p class="site-name">เที่ยวบ้านเรา</p>
+<nav aria-label="เมนูหลัก">
+<ul>
+<li><a href="index.html" >หน้าแรก</a></li>
+<li><a href="places.html">ที่เที่ยว</a></li>
+<li><a href="food.html">อาหาร</a></li>
+<li><a href="plan.html">วางแผนเที่ยว</a></li>
+<li><a href="travel.html">ข้อมูลการเดินทาง</a></li>
+<li><a href="login.html">เข้าสู่ระบบ</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<h1>เที่ยวบ้านเราในหนึ่งวัน</h1>
+
+<section aria-label="แกลเลอรีภาพ">
+<h2>แกลเลอรีภาพบรรยากาศ</h2>
+<div class="slideshow">
+<figure class="slide active"><img src="images/sapanpla.jpg"></figure>
+<figure class="slide"><img src="images/KLM.jpg"></figure>
+<figure class="slide"><img src="images/lukmuang.jpg"></figure>
+<figure class="slide"><img src="images/Kaow.jpg"></figure>
+<figure class="slide"><img src="images/aomanow.jpg"></figure>
+<button class="prev" aria-label="ภาพก่อนหน้า">&#10094;</button>
+<button class="next" aria-label="ภาพถัดไป">&#10095;</button>
+<div class="dots"></div>
+</div>
+</section>
+
+<p>ชวนเดินตลาด ชิมอาหารพื้นถิ่น และพักชมวิวในชุมชน</p>
+<section class="card">
+<h2>เริ่มจากจุดที่คุณสนใจ</h2>
+<p>เลือกสถานที่ที่อยากไป แล้วจัดเส้นทางให้เหมาะกับเวลาของคุณ</p>
+<a class="button" href="places.html">ดูแหล่งท่องเที่ยว</a>
+</section>
+<script>
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelector('.dots');
+const box = document.querySelector('.slideshow');
+let i = 0, timer;
+slides.forEach((_, n) => {
+  const b = document.createElement('button');
+  b.setAttribute('aria-label', 'ภาพที่ ' + (n + 1));
+  b.onclick = () => { show(n); restart(); };
+  dots.appendChild(b);
+});
+function show(n) {
+  i = (n + slides.length) % slides.length;
+  slides.forEach((s, k) => s.classList.toggle('active', k === i));
+  [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+}
+function restart() {
+  clearInterval(timer);
+  timer = setInterval(() => show(i + 1), 4000);
+}
+document.querySelector('.prev').onclick = () => { show(i - 1); restart(); };
+document.querySelector('.next').onclick = () => { show(i + 1); restart(); };
+box.onmouseenter = () => clearInterval(timer);
+box.onmouseleave = restart;
+show(0);
+restart();
+</script>
+</main>
+<footer>
+<p>นพศรัณย์ บรอมเมสสัน 013 ใบงานฝึกปฏิบัติวิชาการสร้างเว็บไซต์ทางธุรกิจ</p>
+
+</footer>
+</body>
+</html>

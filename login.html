@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เข้าสู่ระบบ | เที่ยวบ้านเรา</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<p class="site-name">เที่ยวบ้านเรา</p>
+<nav aria-label="เมนูหลัก">
+<ul>
+<li><a href="index.html">หน้าแรก</a></li>
+<li><a href="places.html">ที่เที่ยว</a></li>
+<li><a href="food.html">อาหาร</a></li>
+<li><a href="plan.html">วางแผนเที่ยว</a></li>
+<li><a href="travel.html">ข้อมูลการเดินทาง</a></li>
+<li><a href="login.html">เข้าสู่ระบบ</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<h1>เข้าสู่ระบบ</h1>
+<section class="card login-card">
+<h2>ยินดีต้อนรับกลับ</h2>
+<form id="f" novalidate>
+<label for="u">ชื่อผู้ใช้</label>
+<input type="text" id="u" name="u" autocomplete="username">
+<label for="p">รหัสผ่าน</label>
+<input type="password" id="p" name="p" autocomplete="current-password">
+<label class="show-pw"><input type="checkbox" id="s"> แสดงรหัสผ่าน</label>
+<button class="button" type="submit">เข้าสู่ระบบ</button>
+<p class="msg" id="m" role="status"></p>
+</form>
+</section>
+<script>
+const f = document.getElementById('f'), u = document.getElementById('u'),
+      p = document.getElementById('p'), m = document.getElementById('m');
+document.getElementById('s').addEventListener('change', e => p.type = e.target.checked ? 'text' : 'password');
+f.addEventListener('submit', e => {
+  e.preventDefault();
+  if (!u.value.trim() || !p.value) { m.textContent = 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน'; return; }
+  if (p.value.length < 6) { m.textContent = 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'; return; }
+  m.textContent = 'เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ ' + u.value.trim();
+  setTimeout(() => location.href = 'index.html', 1200);
+});
+</script>
+</main>
+<footer>
+<p>นพศรัณย์ บรอมเมสสัน 013 ใบงานฝึกปฏิบัติวิชาการสร้างเว็บไซต์ทางธุรกิจ</p>
+</footer>
+</body>
+</html>
